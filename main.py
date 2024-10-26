@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 
 
-CSV_DIR = "./public/activitats.csv"
+CSV_DIR = "/home/toni/Caronte_Challenge/src/entity/activity.py"
 
 def prova():
     # Cargar los archivos CSV
@@ -107,6 +107,4 @@ if __name__ == "__main__":
     a = clf.fit(X, y)
     b = clf.predict(X)
     print(b)
-    prova()
-
 
