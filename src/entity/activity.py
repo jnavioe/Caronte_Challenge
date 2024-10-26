@@ -1,9 +1,9 @@
 class Activity:
-    def __init__(self, activity, submits):
-        self._id = activity['activitat_id']
-        self._name = activity['activitat']
-        self._classId = activity['aula_id']
-        self._initialDate = activity['startdate']
-        self._finalDate = activity['duedate']
-        self._maxGrade = activity['grade']
-        self._submisions = submits
+    def __init__(self, id, name, classroomId, dateInit, dateEnd, maxGrade, submissions):
+        self._id = id
+        self._name = name
+        self._classId = classroomId
+        self._initialDate = dateInit
+        self._finalDate = dateEnd
+        self._maxGrade = maxGrade
+        self._submisions = submissions
