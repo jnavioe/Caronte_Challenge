@@ -1,6 +1,8 @@
 from src.entity.submission import Submission
 from src.entity.activity import Activity
 from src.entity.exam import Exam
+from src.enum.exam import ExamType
+from src.entity.student import Student
 from src.CSV.csv import CsvReader
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
@@ -9,6 +11,7 @@ import pandas as pd
 CSV_DIR = "./public/activitats.csv"
 
 def prova():
+     students = []
     # Cargar los archivos CSV
      trameses = pd.read_csv('./public/trameses.csv')
      activitats = pd.read_csv('./public/activitats.csv')
@@ -22,7 +25,6 @@ def prova():
           # Filtrar los trameses por el 'userid'
           trameses_filtrados = trameses[trameses['userid'] == user_id]
 
-
           tramesesObj = []
           # Objectes trameses
           for tramesa in trameses_filtrados.values:
@@ -32,8 +34,6 @@ def prova():
                nota=tramesa[7]
                fechaNota=tramesa[5]
                n_intentos=tramesa[7]
-               print(id)
-               print(fechasubida)
 
                tramesesObj.append(Submission(id,fechasubida,nota,fechaNota,n_intentos)) 
 
@@ -67,34 +67,25 @@ def prova():
           # examens
           examens_filtrados = examens[examens['userid'] == user_id]
           examensObj = []
+
           #for exam in examens_filtrados:
-            for exa in examens_filtrados.values:
+          for exa in examens_filtrados.values:
               aulaId=exa[1]
-              grade=exa[1]
-              aulaId=exa[1]
+              grade_partial=exa[2]
+              grade_final=exa[4]
+              grade_recovery=exa[6]
               
+              examensObj.append(Exam(ExamType.Midterm, aulaId, grade_partial))
+              examensObj.append(Exam(ExamType.Final, aulaId, grade_final))
+              examensObj.append(Exam(ExamType.Makeup, aulaId, grade_recovery))
+
+        #estudiante FINAL transformer
+          students.append(Student(user_id,activitatsObj,tramesesObj,examensObj))
+
+     return students 
 
 
-              
-               
-             
-          
-
-
-
-          # Alumne objectes
-          
-
-          # Imprimir los resultados para cada alumno
-          print(f"Alumno ID: {user_id}")
-          print(f"Número total de exàmens: {total_examenes}")
-          print('---')  # Separador para mayor claridad
-
-           
-
-
-
-
+    
 if __name__ == "__main__":
     csv_reader = CsvReader(CSV_DIR)
 
@@ -107,6 +98,7 @@ if __name__ == "__main__":
     a = clf.fit(X, y)
     b = clf.predict(X)
     print(b)
-    prova()
+    students=prova()
+    print(students)
 
 
