@@ -2,7 +2,7 @@ from src.CSV.csv import CsvReader
 from sklearn.ensemble import RandomForestClassifier
 
 
-CSV_DIR = "/home/iker/Desktop/Caronte_Challenge/activitats.csv"
+CSV_DIR = "/home/toni/Caronte_Challenge/activitats.csv"
 
 if __name__ == "__main__":
     csv_reader = CsvReader(CSV_DIR)
