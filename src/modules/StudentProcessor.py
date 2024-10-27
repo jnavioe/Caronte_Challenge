@@ -7,7 +7,6 @@ import pandas as pd
 import csv
 from src.utils.csv_paths import SUBMISSION_FILE, ACTIVITY_FILE, EXAM_FILE
 
-
 class StudentProcessor:
     def __init__(self, submission_file=SUBMISSION_FILE, activity_file=ACTIVITY_FILE, exam_file=EXAM_FILE):
         self._submission_matrix = self._read_csv(submission_file)
@@ -48,8 +47,7 @@ class StudentProcessor:
                 classroomId=activity["aula_id"],
                 dateInit=activity["startdate"],
                 dateEnd=activity["duedate"],
-                maxGrade=activity["grade"],
-                submissions=[]
+                maxGrade=activity["grade"]
             )
             activities_dict[activity["activitat_id"]] = act
         return activities_dict
@@ -66,7 +64,7 @@ class StudentProcessor:
             if activity:
                 submissions_list.append(Submission(
                     id=submission['id'],
-                    data_upload=submission['datesubmitted'],
+                    date_upload=submission['datesubmitted'],
                     grade=submission['grade'],
                     date_evaluated=submission['dategraded'],
                     time_tried=submission['nevaluations'],
