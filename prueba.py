@@ -137,5 +137,8 @@ def prueba(numero):
         sns.pairplot(trameses[cols], height=1.75);
         print("jelou2")
         
+        #mix prueba
+
+        
 
 prueba()
